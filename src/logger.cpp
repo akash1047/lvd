@@ -30,6 +30,7 @@ public:
   void log(level lvl, std::format_string<Args...> format, Args... args) {
     std::print("[{}] ", level_to_string[lvl]);
     std::print(format, std::forward<Args>(args)...);
+    std::print("\n");
   }
 
   template <class... Args>
