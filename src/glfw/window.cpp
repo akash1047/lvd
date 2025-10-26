@@ -11,7 +11,7 @@ export namespace glfw {
 class window {
 public:
   window(const int width, const int height, std::string title) {
-    window_ptr = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
+    window_ptr = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
     if (!window_ptr) {
       throw std::runtime_error("Failed to create GLFW window");
     }
