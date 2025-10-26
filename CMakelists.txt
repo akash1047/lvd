@@ -4,8 +4,32 @@ project(lvd VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(lvd src/main.cpp)
+add_executable(lvd)
+
+target_sources(lvd
+    PRIVATE
+        src/main.cpp
+
+    PRIVATE
+    FILE_SET glfw TYPE CXX_MODULES
+    FILES
+        src/glfw/glfw.cpp
+        src/glfw/window.cpp
+
+
+    PRIVATE
+    FILE_SET logger TYPE CXX_MODULES
+    FILES
+        src/logger.cpp
+)
+
+add_subdirectory(external/glfw)
+
+target_include_directories(lvd PRIVATE 
+    external/glfw/include
+    "$ENV{VULKAN_HOME}/Include"
+)
 
 target_link_directories(lvd PRIVATE "$ENV{VULKAN_HOME}/Lib")
 
-target_link_libraries(lvd PRIVATE vulkan-1)
+target_link_libraries(lvd PRIVATE vulkan-1 glfw)
